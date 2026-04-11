@@ -1,10 +1,12 @@
 ﻿from pathlib import Path
 import webbrowser
 from flask import Flask, jsonify, request, send_from_directory
-from chatbot import generate_response
 import time
 from mistralai.client import Mistral
-from ai_ori import Chatbot
+from ai import Chatbot
+from flask.cli import load_dotenv
+
+load_dotenv()
 
 chatbot = Chatbot()
 
@@ -19,15 +21,8 @@ def index():
 def chat_api():
     data = request.get_json(silent=True) or {}
     message = data.get('message', '')
-    # response = generate_response(message)
 
-    responses, executed = chatbot.continue_conversation(message)
-    print("UDAH BALIK")
-    if executed:
-        write_response = ""
-        for r in responses:
-            write_response += r["message"]
-        responses = write_response
+    responses = chatbot.continue_conversation(message)
 
     return jsonify({'response': responses})
 

@@ -4,6 +4,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+import pytz
 
 # Scope: full access to calendar
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -29,8 +30,9 @@ class Calendar:
 
 
     def get_event_ids(self, query):
-        max_results = 1
-        now = datetime.datetime.utcnow().isoformat() + 'Z'
+        max_results = 5
+        tz = pytz.timezone("Asia/Hong_Kong")
+        now = datetime.datetime.now(tz).isoformat()
         events_result = self.service.events().list(
             calendarId='primary',
             timeMin=now,
@@ -40,14 +42,14 @@ class Calendar:
             q=query  
         ).execute()
         events = events_result.get('items', [])
-        # results = []
-        # for event in events:
-        #     results.append({
-        #         'id': event['id'],
-        #         'summary': event.get('summary'),
-        #         'start': event['start'].get('dateTime', event['start'].get('date'))
-        #     })
-        return events[0]['id'] if events else None
+        results = []
+        for event in events:
+            results.append({
+                'id': event['id'],
+                'summary': event.get('summary'),
+                'start': event['start'].get('dateTime', event['start'].get('date'))
+            })
+        return str([event['id'] for event in events]) if events else None
 
 
     def set_new_event(self, **kwargs):
@@ -64,12 +66,13 @@ class Calendar:
         event = self.service.events().insert(calendarId='primary', body=event).execute()
         print('Event created: %s' % (event.get('htmlLink')))
 
-        return {"message": "Event created successfully."}
+        return "Event created successfully."
 
 
     def list_upcoming_events(self, **kwargs):
         max_results = kwargs.get('max_results', 10)
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' means UTC
+        tz = pytz.timezone("Asia/Hong_Kong")
+        now = datetime.datetime.now(tz).isoformat()
         events_result = self.service.events().list(
             calendarId='primary',
             timeMin=now,
@@ -82,26 +85,35 @@ class Calendar:
         if not events:
             print('No upcoming events found.')
         else:
+            results = []
             for event in events:
                 start = event['start'].get('dateTime', event['start'].get('date'))
+                end = event['end'].get('dateTime', event['end'].get('date'))
                 print(start, event['summary'])
+                results.append((start, end, event['summary'], event['id']))
 
-        return {"events": events}
+        return str(results)
 
 
     def delete_event(self, **kwargs):
-        event_id = self.get_event_ids(kwargs['query'])
+        # event_ids = self.get_event_ids(kwargs['query'])
+        event_id = kwargs['event_id']
+        log = ""
         try:
             self.service.events().delete(calendarId='primary', eventId=event_id).execute()
             print(f'Event {event_id} deleted successfully.')
+            log += f'Event {event_id} deleted successfully.\n'
+
         except Exception as e:
             print(f'An error occurred: {e}')
+            return f'Failed to delete event: {e}'
 
-        return {"message": 'Event deleted successfully.'}
+        return log
 
 
     def update_event(self, **kwargs):
-        event_id = self.get_event_ids(kwargs['query'])
+        event_id = kwargs['event_id']
+        log = ""
         try:
             event = self.service.events().get(calendarId='primary', eventId=event_id).execute()
             for key, value in kwargs.items():
@@ -113,7 +125,9 @@ class Calendar:
                 body=event
             ).execute()
             print('Event updated: %s' % updated_event.get('htmlLink'))
+            log += f'Event {event_id} updated successfully.\n'
         except Exception as e:
             print(f'An error occurred: {e}')
+            return f'Failed to update event: {e}'
 
-        return {"message": 'Event updated successfully.'}
+        return log
