@@ -1,0 +1,126 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "set_new_event",
+            "description": "Set a new event in the calendar",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "type": "string",
+                        "description": "The summary of the event."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The location of the event."
+                    },
+                    "start": {
+                        "type": "object",
+                        "properties": {
+                            "dateTime": { "type": "string", "description": "Start time" },
+                            "timeZone": { "type": "string", "description": "Timezone of the start time" }
+                        }
+                    },
+                    "end": {
+                        "type": "object",
+                        "properties": {
+                            "dateTime": { "type": "string", "description": "End time" },
+                            "timeZone": { "type": "string", "description": "Timezone of the end time" }
+                        }
+                    }
+                },
+                "required": ["summary", "start", "end"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_event_ids",
+            "description": "Retrieve event IDs based on a query",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The query to search for the event."
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "list_upcoming_events",
+            "description": "List upcoming events in the calendar",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "max_results": {
+                        "type": "integer",
+                        "description": "The maximum number of events to retrieve."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "delete_event",
+            "description": "Delete an event from the calendar",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The query to search for the event."
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "update_event",
+            "description": "Update an existing event in the calendar",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The query to search for the event ID."
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "The summary of the event."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The location of the event."
+                    },
+                    "start": {
+                        "type": "object",
+                        "properties": {
+                            "dateTime": { "type": "string", "description": "Start time" },
+                            "timeZone": { "type": "string", "description": "Timezone of the start time" }
+                        }
+                    },
+                    "end": {
+                        "type": "object",
+                        "properties": {
+                            "dateTime": { "type": "string", "description": "End time" },
+                            "timeZone": { "type": "string", "description": "Timezone of the end time" }
+                        }
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
