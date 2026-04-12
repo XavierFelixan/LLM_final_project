@@ -3,7 +3,6 @@ import os
 import json
 import time
 from flask.cli import load_dotenv
-from jaraco.functools import retry
 from mistralai.client import Mistral
 from calendar_manager import Calendar
 
@@ -69,6 +68,7 @@ class Chatbot:
         self.inputs.append(response.choices[0].message)
 
         while response.choices[0].message.tool_calls:
+            print("RESPONSE", response)
             if response.choices[0].message.content:
                 print("Assistant:", response.choices[0].message.content)
 

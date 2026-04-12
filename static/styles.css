@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
@@ -20,11 +20,16 @@ body {
 
 .app-shell {
   width: min(100%, 760px);
+  height: min(100vh - 48px, 900px);
+  max-height: min(100vh - 48px, 900px);
+  display: flex;
+  flex-direction: column;
   background: rgba(18, 28, 50, 0.94);
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 24px;
   padding: 24px;
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
 .app-header {
@@ -46,7 +51,9 @@ body {
 }
 
 .chat-window {
-  min-height: 400px;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100vh - 240px);
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(10, 15, 27, 0.95));
   border-radius: 20px;
   padding: 18px;

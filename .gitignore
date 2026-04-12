@@ -2,3 +2,5 @@ token.json
 __pycache__/
 credentials.json
 .env
+ai_ori.py
+test.py

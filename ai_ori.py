@@ -1,7 +1,6 @@
 import os
 import json
 import time
-from jaraco.functools import retry
 from mistralai.client import Mistral
 from calendar_manager import Calendar
 

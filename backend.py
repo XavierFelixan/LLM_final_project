@@ -1,6 +1,6 @@
 ﻿from pathlib import Path
 import webbrowser
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, abort, jsonify, request, send_from_directory
 import time
 from mistralai.client import Mistral
 from ai import Chatbot
@@ -11,7 +11,7 @@ load_dotenv()
 chatbot = Chatbot()
 
 BASE_DIR = Path(__file__).resolve().parent
-app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path='')
+app = Flask(__name__, static_folder=str(BASE_DIR/"static"), static_url_path='/static')
 
 @app.route('/')
 def index():
@@ -25,10 +25,6 @@ def chat_api():
     responses = chatbot.continue_conversation(message)
 
     return jsonify({'response': responses})
-
-@app.route('/<path:path>')
-def static_proxy(path):
-    return send_from_directory(app.static_folder, path)
 
 if __name__ == '__main__':
     PORT = 8000

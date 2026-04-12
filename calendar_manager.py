@@ -29,8 +29,9 @@ class Calendar:
         self.service = build('calendar', 'v3', credentials=creds)
 
 
-    def get_event_ids(self, query):
-        max_results = 5
+    def get_event_ids(self, **kwargs):
+        max_results = kwargs.get('max_results', 5)
+        query = kwargs.get('query')
         tz = pytz.timezone("Asia/Hong_Kong")
         now = datetime.datetime.now(tz).isoformat()
         events_result = self.service.events().list(

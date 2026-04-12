@@ -38,13 +38,17 @@
         "type": "function",
         "function": {
             "name": "get_event_ids",
-            "description": "Retrieve event IDs based on a query, only based on the event summary, at most 5 results, needed for delete_event or update_event operations",
+            "description": "Retrieve event IDs based on a query, only based on the event summary, do not include time in the query, needed for delete_event or update_event operations",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "query": {
                         "type": "string",
-                        "description": "The query to search for the event, only based on the event summary."
+                        "description": "The query to search for the event, only based on the event summary, do not include time in the query."
+                    },
+                    "max_results": {
+                        "type": "integer",
+                        "description": "The maximum number of event IDs to retrieve."
                     }
                 },
                 "required": ["query"]
