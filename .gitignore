@@ -1,5 +1,6 @@
-token.json
+old_creds/
 __pycache__/
+token.json
 credentials.json
 .env
 ai_ori.py

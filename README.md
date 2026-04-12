@@ -34,3 +34,4 @@ http://127.0.0.1:8000/
 ## Notes
 
 The chatbot page is served by Flask and the bot replies are generated through a simple backend API at `/api/chat`.
+In order to see changes in Google Calendar for the end-to-end workflow, feel free to use a built dummy email. All credentials are in `.env` file. The current state of the project is built in accordance to that dummy email.
