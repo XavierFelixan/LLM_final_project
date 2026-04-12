@@ -49,6 +49,10 @@
                     "max_results": {
                         "type": "integer",
                         "description": "The maximum number of event IDs to retrieve."
+                    },
+                    "now": {
+                        "type": "string",
+                        "description": "The starting time in ISO format with which to filter and search the events."
                     }
                 },
                 "required": ["query"]

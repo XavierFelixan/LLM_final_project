@@ -33,7 +33,7 @@ class Calendar:
         max_results = kwargs.get('max_results', 5)
         query = kwargs.get('query')
         tz = pytz.timezone("Asia/Hong_Kong")
-        now = datetime.datetime.now(tz).isoformat()
+        now = kwargs.get('now', datetime.datetime.now(tz).isoformat())
         events_result = self.service.events().list(
             calendarId='primary',
             timeMin=now,
@@ -50,7 +50,7 @@ class Calendar:
                 'summary': event.get('summary'),
                 'start': event['start'].get('dateTime', event['start'].get('date'))
             })
-        return str([event['id'] for event in events]) if events else None
+        return str([event['id'] for event in events]) if events else "No such events found."
 
 
     def set_new_event(self, **kwargs):
