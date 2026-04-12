@@ -4,24 +4,25 @@ This project contains a simple chatbot-like website interface with a local front
 
 ## Files
 
-- `index.html` — main website page
-- `styles.css` — interface styling
-- `script.js` — chat interaction logic
-- `frontend.py` — local file server launcher
-- `chatbot.py` — simple chatbot response helper
+- `/static/index.html` — main website page
+- `/static/styles.css` — interface styling
+- `/static/script.js` — chat interaction logic
+- `backend.py` — local file server launcher
+- `ai.py` — AI agent
+- `calendar_manager.py` — calendar manager object to connect with Google Calendar
 
 ## Run locally
 
-1. Install Flask if needed:
+1. Install all requirements if needed:
 
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
 2. Run the Flask app:
 
 ```bash
-python frontend.py
+python backend.py
 ```
 
 3. Your browser should open automatically. If it does not, go to:
