@@ -31,8 +31,6 @@ python backend.py
 http://127.0.0.1:8000/
 ```
 
-![Alt text](![Agentda Website](LLM_final_project/Agentda%20Website.jpg))
-
 ## Notes
 
 The chatbot page is served by Flask and the bot replies are generated through a simple backend API at `/api/chat`.
