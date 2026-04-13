@@ -1,6 +1,6 @@
 # Agentda - Your Agent-based Schedule Manager
 
-This project contains an agent-based schedule manager system integrated with Google Calendar
+Agentda is an AI Chatbot schedule manager that integrates seamlessly with your Google Calendar.
 
 ## Files
 
@@ -32,6 +32,8 @@ python backend.py
 ```text
 http://127.0.0.1:8000/
 ```
+
+![Alt text](![Agentda Website](LLM_final_project/Agentda%20Website.jpg))
 
 ## Notes
 
