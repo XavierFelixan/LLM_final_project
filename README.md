@@ -1,6 +1,6 @@
-# Simple Chatbot Website
+# Agentda Schedule Manager
 
-This project contains a simple chatbot-like website interface with a local frontend.
+Agentda is an AI Chatbot schedule manager that integrates seamlessly with your Google Calendar.
 
 ## Files
 
@@ -30,6 +30,8 @@ python backend.py
 ```text
 http://127.0.0.1:8000/
 ```
+
+![Alt text](![Agentda Website](LLM_final_project/Agentda%20Website.jpg))
 
 ## Notes
 
