@@ -1,7 +1,10 @@
 old_creds/
+new_creds/
 __pycache__/
+final_project/
 token.json
 credentials.json
 .env
 ai_ori.py
 test.py
+final_project.zip
