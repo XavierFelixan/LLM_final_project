@@ -84,7 +84,7 @@ class Calendar:
         events = events_result.get('items', [])
 
         if not events:
-            print('No upcoming events found.')
+            results = "No upcoming events found."
         else:
             results = []
             for event in events:
